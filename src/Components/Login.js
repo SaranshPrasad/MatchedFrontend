@@ -48,6 +48,7 @@ const Login = () => {
         const token = response.data.token;
         Cookies.set("token", token, { expires: 1 });
         setSnackbar({ open: true, message: "Login successful!", severity: "success" });
+        console.log(response.data);
         navigate("/dashboard");
       }
     } catch (error) {
