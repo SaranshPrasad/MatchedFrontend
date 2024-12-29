@@ -50,9 +50,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`${database_url}/all/event`, {
-          withCredentials: true,
-          headers: { Authorization: `Bearer ${token}` }
+        const response = await axios.get(`https://matched-3qlo.onrender.com/all/event`, {
+          withCredentials: true
         });
         setEvents(response.data.eventData);
         console.log(response.data);
@@ -77,10 +76,9 @@ const Dashboard = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.get(
-        `${database_url}/all/${eventId}/attendee`,
+        `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,
         {
-          withCredentials: true,
-          headers: { Authorization: `Bearer ${token}` }
+          withCredentials: true
         }
       );
       setAttendees(response.data.attendeeData);
@@ -96,9 +94,9 @@ const Dashboard = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.post(
-        `${database_url}/event/create`,
+        `https://matched-3qlo.onrender.com/event/create`,
         { event_name: eventName },
-        { withCredentials: true,  headers: { Authorization: `Bearer ${token}` } }
+        { withCredentials: true}
       );
       setEvents([...events, response.data.data]);
       showSnackbar("Event created successfully.");
@@ -121,8 +119,8 @@ const Dashboard = () => {
   const handleDeleteEvent = async (eventId) => {
     try {
       const token = Cookies.get("token");
-      await axios.delete(`${database_url}/event/${eventId}`, {
-        withCredentials: true, headers: { Authorization: `Bearer ${token}` }
+      await axios.delete(`https://matched-3qlo.onrender.com/event/${eventId}`, {
+        withCredentials: true
       });
       setEvents(events.filter((event) => event._id !== eventId));
       showSnackbar("Event deleted successfully.");
@@ -141,8 +139,8 @@ const Dashboard = () => {
   const generateMatch = async (event_id) => {
     try {
       const response = await axios.get(
-        `${database_url}/match/${event_id}`,
-        { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
+        `https://matched-3qlo.onrender.com/match/${event_id}`,
+        { withCredentials: true}
       );
       showSnackbar("Match generated successfully.");
       console.log(response.data);
