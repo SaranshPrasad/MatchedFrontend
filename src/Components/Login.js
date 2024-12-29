@@ -42,7 +42,7 @@ const Login = () => {
       const response = await axios.post(`${database_url}/auth/login`, {
         email,
         password,
-      });
+      },{withCredentials: true});
 
       if (response.status === 200) {
         const token = response.data.token;
