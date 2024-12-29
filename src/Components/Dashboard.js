@@ -44,6 +44,7 @@ const Dashboard = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
   const token = Cookies.get("token");
+  console.log(token);
   if(!token) navigate("/login");
 
   // Fetch events when the component mounts
