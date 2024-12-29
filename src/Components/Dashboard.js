@@ -49,10 +49,10 @@ const Dashboard = () => {
   // Fetch events when the component mounts
   useEffect(() => {
     const fetchEvents = async () => {
-      console.log(database_url);
       try {
         const response = await axios.get(`${database_url}/all/event`, {
           withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` }
         });
         setEvents(response.data.eventData);
         console.log(response.data);
@@ -80,6 +80,7 @@ const Dashboard = () => {
         `${database_url}/all/${eventId}/attendee`,
         {
           withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` }
         }
       );
       setAttendees(response.data.attendeeData);
@@ -97,7 +98,7 @@ const Dashboard = () => {
       const response = await axios.post(
         `${database_url}/event/create`,
         { event_name: eventName },
-        { withCredentials: true }
+        { withCredentials: true,  headers: { Authorization: `Bearer ${token}` } }
       );
       setEvents([...events, response.data.data]);
       showSnackbar("Event created successfully.");
@@ -121,7 +122,7 @@ const Dashboard = () => {
     try {
       const token = Cookies.get("token");
       await axios.delete(`${database_url}/event/${eventId}`, {
-        withCredentials: true,
+        withCredentials: true, headers: { Authorization: `Bearer ${token}` }
       });
       setEvents(events.filter((event) => event._id !== eventId));
       showSnackbar("Event deleted successfully.");
@@ -141,7 +142,7 @@ const Dashboard = () => {
     try {
       const response = await axios.get(
         `${database_url}/match/${event_id}`,
-        { withCredentials: true }
+        { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
       );
       showSnackbar("Match generated successfully.");
       console.log(response.data);
