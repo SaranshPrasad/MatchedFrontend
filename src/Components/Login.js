@@ -46,7 +46,7 @@ const Login = () => {
 
       if (response.status === 200) {
         const token = response.data.token;
-        Cookies.set("token", token, { expires: 1 });
+        Cookies.set('token', token, { expires: 1, secure: true, httpOnly: true, sameSite: 'Strict' });
         setSnackbar({ open: true, message: "Login successful!", severity: "success" });
         console.log(response.data);
         navigate("/dashboard");
