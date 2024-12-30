@@ -3,7 +3,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Box } from '
 import { QRCodeCanvas } from 'qrcode.react'; // Import QRCodeCanvas from qrcode.react
 
 const QRDisplay = ({ open, handleClose, qrData }) => {
-  const url = `http://localhost:3000/attendee/${qrData}/register`; // URL with event_id
+  const url = `https://matchedfrontend.onrender.com/attendee/${qrData}/register`; // URL with event_id
 
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
