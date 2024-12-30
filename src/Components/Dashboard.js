@@ -52,8 +52,7 @@ const Dashboard = () => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(`https://matched-3qlo.onrender.com/all/event`, {
-          withCredentials: true,method: "GET",
-    credentials: "include", // Allows cookies to be sent with the request
+          withCredentials: true,
     headers: {
         "Content-Type": "application/json"
     }
