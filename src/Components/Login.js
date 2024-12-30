@@ -42,7 +42,7 @@ const Login = () => {
       const response = await axios.post(`${database_url}/auth/login`, {
         email,
         password,
-      },{withCredentials: true,credentials: "include", // Required to handle cookies
+      },{withCredentials: true, // Required to handle cookies
     headers: {
         "Content-Type": "application/json",
     }});
