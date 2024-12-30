@@ -47,7 +47,7 @@ const Login = () => {
       if (response.status === 200) {
         const token = response.data.token;
         Cookies.set("token", token, { expires: 1 });
-        
+         axios.defaults.headers.common["Authorization"] = token;
         setSnackbar({ open: true, message: "Login successful!", severity: "success" });
         console.log(response.data);
         navigate("/dashboard");
