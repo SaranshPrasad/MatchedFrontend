@@ -52,7 +52,10 @@ const Dashboard = () => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(`https://matched-3qlo.onrender.com/all/event`, {
-          withCredentials: true
+          withCredentials: true,
+          headers: {
+        'Authorization': `Bearer ${Cookies.get("token")}`, // Send token if required
+      },
         });
         setEvents(response.data.eventData);
         console.log(response.data);
@@ -79,7 +82,10 @@ const Dashboard = () => {
       const response = await axios.get(
         `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,
         {
-          withCredentials: true
+          withCredentials: true,
+          headers: {
+        'Authorization': `Bearer ${Cookies.get("token")}`, // Send token if required
+      },
         }
       );
       setAttendees(response.data.attendeeData);
@@ -97,7 +103,10 @@ const Dashboard = () => {
       const response = await axios.post(
         `https://matched-3qlo.onrender.com/event/create`,
         { event_name: eventName },
-        { withCredentials: true}
+        { withCredentials: true,
+headers: {
+        'Authorization': `Bearer ${Cookies.get("token")}`, // Send token if required
+      },}
       );
       setEvents([...events, response.data.data]);
       showSnackbar("Event created successfully.");
@@ -121,7 +130,9 @@ const Dashboard = () => {
     try {
       const token = Cookies.get("token");
       await axios.delete(`https://matched-3qlo.onrender.com/event/${eventId}`, {
-        withCredentials: true
+        withCredentials: true,headers: {
+        'Authorization': `Bearer ${Cookies.get("token")}`, // Send token if required
+      }
       });
       setEvents(events.filter((event) => event._id !== eventId));
       showSnackbar("Event deleted successfully.");
@@ -141,7 +152,9 @@ const Dashboard = () => {
     try {
       const response = await axios.get(
         `https://matched-3qlo.onrender.com/match/${event_id}`,
-        { withCredentials: true}
+        { withCredentials: true,headers: {
+        'Authorization': `Bearer ${Cookies.get("token")}`, // Send token if required
+      }}
       );
       showSnackbar("Match generated successfully.");
       console.log(response.data);
