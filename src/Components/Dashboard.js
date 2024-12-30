@@ -48,12 +48,15 @@ const Dashboard = () => {
   if(!token) navigate("/login");
 
   // Fetch events when the component mounts
+  const options = {
+    withCredentials: true,
+     headers:{'Authorization': `Bearer ${token}`}
+  }
+  
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get(`https://matched-3qlo.onrender.com/all/event`, {
-          withCredentials: true
-        });
+        const response = await axios.get(`https://matched-3qlo.onrender.com/all/event`, options);
         setEvents(response.data.eventData);
         console.log(response.data);
         setOwnerName(response.data.eventData[0].owner_id.username);
@@ -77,11 +80,7 @@ const Dashboard = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.get(
-        `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,
-        
-        { headers: {
-        Authorization: `Bearer ${token}`
-    }}
+        `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,options}
         
       );
       setAttendees(response.data.attendeeData);
@@ -98,10 +97,7 @@ const Dashboard = () => {
       const token = Cookies.get("token");
       const response = await axios.post(
         `https://matched-3qlo.onrender.com/event/create`,
-        { event_name: eventName },
-        {headers: {
-        Authorization: `Bearer ${token}`
-    }}
+        { event_name: eventName },options}
       );
       setEvents([...events, response.data.data]);
       showSnackbar("Event created successfully.");
@@ -124,10 +120,7 @@ const Dashboard = () => {
   const handleDeleteEvent = async (eventId) => {
     try {
       const token = Cookies.get("token");
-      await axios.delete(`https://matched-3qlo.onrender.com/event/${eventId}`, {
-        headers: {
-        Authorization: `Bearer ${token}`
-    }});
+      await axios.delete(`https://matched-3qlo.onrender.com/event/${eventId}`, options);
       setEvents(events.filter((event) => event._id !== eventId));
       showSnackbar("Event deleted successfully.");
     } catch (error) {
