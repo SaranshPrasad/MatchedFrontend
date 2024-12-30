@@ -79,9 +79,9 @@ const Dashboard = () => {
       const response = await axios.get(
         `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,
         
-          headers: {
+        { headers: {
         Authorization: `Bearer ${token}`
-    }
+    }}
         
       );
       setAttendees(response.data.attendeeData);
