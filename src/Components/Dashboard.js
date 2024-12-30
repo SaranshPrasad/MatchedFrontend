@@ -80,7 +80,7 @@ const Dashboard = () => {
     try {
       const token = Cookies.get("token");
       const response = await axios.get(
-        `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,options}
+        `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,options
         
       );
       setAttendees(response.data.attendeeData);
@@ -97,7 +97,7 @@ const Dashboard = () => {
       const token = Cookies.get("token");
       const response = await axios.post(
         `https://matched-3qlo.onrender.com/event/create`,
-        { event_name: eventName },options}
+        { event_name: eventName },options
       );
       setEvents([...events, response.data.data]);
       showSnackbar("Event created successfully.");
@@ -138,10 +138,7 @@ const Dashboard = () => {
   const generateMatch = async (event_id) => {
     try {
       const response = await axios.get(
-        `https://matched-3qlo.onrender.com/match/${event_id}`,
-        { headers: {
-        Authorization: `Bearer ${token}`
-    }}
+        `https://matched-3qlo.onrender.com/match/${event_id}`, options
       );
       showSnackbar("Match generated successfully.");
       console.log(response.data);
