@@ -52,10 +52,7 @@ const Dashboard = () => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get(`https://matched-3qlo.onrender.com/all/event`, {
-          withCredentials: true,
-    headers: {
-        "Content-Type": "application/json"
-    }
+          withCredentials: true
         });
         setEvents(response.data.eventData);
         console.log(response.data);
@@ -82,11 +79,7 @@ const Dashboard = () => {
       const response = await axios.get(
         `https://matched-3qlo.onrender.com/all/${eventId}/attendee`,
         {
-          withCredentials: true,method: "GET",
-    credentials: "include", // Allows cookies to be sent with the request
-    headers: {
-        "Content-Type": "application/json"
-    }
+          withCredentials: true
         }
       );
       setAttendees(response.data.attendeeData);
@@ -104,11 +97,7 @@ const Dashboard = () => {
       const response = await axios.post(
         `https://matched-3qlo.onrender.com/event/create`,
         { event_name: eventName },
-        { withCredentials: true,method: "POST",
-    credentials: "include", // Allows cookies to be sent with the request
-    headers: {
-        "Content-Type": "application/json"
-    },}
+        { withCredentials: true}
       );
       setEvents([...events, response.data.data]);
       showSnackbar("Event created successfully.");
@@ -132,12 +121,7 @@ const Dashboard = () => {
     try {
       const token = Cookies.get("token");
       await axios.delete(`https://matched-3qlo.onrender.com/event/${eventId}`, {
-        withCredentials: true,method: "DELETE",
-    credentials: "include", // Allows cookies to be sent with the request
-    headers: {
-        "Content-Type": "application/json"
-    }
-      });
+        withCredentials: true });
       setEvents(events.filter((event) => event._id !== eventId));
       showSnackbar("Event deleted successfully.");
     } catch (error) {
@@ -156,11 +140,7 @@ const Dashboard = () => {
     try {
       const response = await axios.get(
         `https://matched-3qlo.onrender.com/match/${event_id}`,
-        { withCredentials: true,method: "GET",
-    credentials: "include", // Allows cookies to be sent with the request
-    headers: {
-        "Content-Type": "application/json"
-    }}
+        { withCredentials: true}
       );
       showSnackbar("Match generated successfully.");
       console.log(response.data);
