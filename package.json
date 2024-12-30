@@ -22,6 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://matched-3qlo.onrender.com",
   "eslintConfig": {
     "extends": [
       "react-app",
